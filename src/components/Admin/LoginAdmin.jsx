@@ -17,7 +17,7 @@ const LoginAdmin = () => {
             setLoading(true);
             logout();
             await auth("adminlogin", formData);
-            navigate('/');
+            navigate('/admin');
             window.location.reload()
         } catch (error) {
             setError(error.message);
