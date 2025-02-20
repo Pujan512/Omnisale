@@ -8,6 +8,8 @@ const Navbar = () => {
     const searchRef = useRef(null);
     const [isPopupVisible, setIsPopupVisible] = useState(false);
     const [searchParams, setSearchParams] = useSearchParams();
+    const bytes = atob(sessionStorage.getItem("adminRole"));
+    const text = new TextDecoder('utf-8').decode(new Uint8Array([...bytes].map(char => char.charCodeAt(0))));
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -36,6 +38,7 @@ const Navbar = () => {
                 <Link className="cursor-pointer text-2xl" to="/">OmniSale</Link>
                 <Link className="cursor-pointer" to="/" onClick={scrollToTop}>Home</Link>
                 <a href="/#category" className="cursor-pointer">Category</a>
+                {getCurrentUser() && text == "PujanNirjala" && <li className="cursor-pointer hover:bg-gray-700 p-2"><Link to="/admin">Admin</Link></li>}
             </div>
 
             <div className="flex border-1 p-2 rounded-md min-w-sm ">
@@ -49,10 +52,10 @@ const Navbar = () => {
             {getCurrentUser() ?
                 <div className="flex gap-2 w-60 relative justify-end right-0">
                     <button className="text-red-400 border-1 font-semibold text-xl rounded-md flex gap-2 pr-4 items-center hover:bg-red-500 hover:text-white cursor-pointer" onClick={() => navigate('/AddProd')}>
-                    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-plus inline " viewBox="0 0 16 16">
-                        <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
-                    </svg> Add
-                </button>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-plus inline " viewBox="0 0 16 16">
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
+                        </svg> Add
+                    </button>
                     <Link className="cursor-pointer p-2 hover:bg-zinc-600" to="/cart">
                         <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-cart" viewBox="0 0 16 16" >
                             <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5M3.102 4l1.313 7h8.17l1.313-7zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4m7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4m-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2m7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2" />
@@ -64,7 +67,7 @@ const Navbar = () => {
                             <path className="userIcon" fillRule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8m8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1" />
                         </svg>
                     </a>
-                    <UserPopup isVisible={isPopupVisible} onClose={closePopup}/>
+                    <UserPopup isVisible={isPopupVisible} onClose={closePopup} />
                 </div>
                 :
                 <div className="flex gap-5 w-60 relative justify-end right-0">
