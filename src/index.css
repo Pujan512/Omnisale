@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+.main{
+  margin: 2vh 5vw;
+  min-height: 75.5vh;
+}
+
+html{
+  background-color: white;
+}
