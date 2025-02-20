@@ -2,10 +2,6 @@
   "version": 2,
   "routes": [
     {
-      "src": "/(.*)",
-      "dest": "/public/$1"
-    },
-    {
       "src": "/.*\\.js",
       "headers": {
         "Content-Type": "application/javascript"
@@ -37,6 +33,10 @@
       "headers": {
         "Cache-Control": "public, max-age=31536000"
       }
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/public/$1"
     },
     {
       "src": "/.*",
