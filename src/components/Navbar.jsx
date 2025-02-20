@@ -65,6 +65,7 @@ const Navbar = () => {
                         </svg>
                     </a>
                     <UserPopup isVisible={isPopupVisible} onClose={closePopup}/>
+                    <Link className="cursor-pointer" to="/admin" onClick={scrollToTop}>Admin</Link>
                 </div>
                 :
                 <div className="flex gap-5 w-60 relative justify-end right-0">
