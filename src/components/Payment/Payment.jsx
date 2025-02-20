@@ -8,12 +8,11 @@ const Payment = ({price = 1, btnName = "Make Payment", order = "cart", orderId =
             const response = await fetch(import.meta.env.VITE_API_URL_PAYMENT, {
                 method: 'POST',
                 headers: {
-                    'Authorization': 'key '+ import.meta.env.VITE_KHALTI_KEY,
                     'Content-Type': 'application/json',
 
                 }, body: JSON.stringify({
-                    "return_url": "http://localhost:3000/payment/",
-                    "website_url": "http://localhost:3000/",
+                    "return_url": "https://omnisale.vercel.app//payment/",
+                    "website_url": "https://omnisale.vercel.app//",
                     "amount": `${price * 100}`,
                     "purchase_order_id": orderId,
                     "purchase_order_name": order,

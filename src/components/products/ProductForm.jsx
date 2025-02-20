@@ -108,7 +108,7 @@ const ProductForm = () => {
     }, []);
 
     const categoryOptions = useMemo(() => categories.map((category, index) => (
-        <option key={index} value={category.id}>{category.name}</option>
+        <option className="text-black" key={index} value={category.id}>{category.name}</option>
     )), [categories]);
 
     return (
