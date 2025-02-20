@@ -83,43 +83,48 @@ function App() {
       <ProductContext.Provider value={productContextValue}>
         <CartContext.Provider value={{ cart, setCart }}>
           <PointContext.Provider value={{ point, setPoint }}>
-            <BrowserRouter >
+            <BrowserRouter>
               <Navbar />
-                <Routes>
-                  <Route path="/" element={<Homepage />} />
-                  <Route path="/BuyPoints" element={<BuyPoints />} />
-                  <Route path="/search" element={<SearchResults />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/adminLogin" element={<LoginAdmin />} />
-                  <Route path="/signup" element={<SignUp />} />
-                  <Route path="/confirmEmail" element={<ConfirmEmail />} />
-                  <Route path="/forgotPassword" element={<ForgotPassword />} />
-                  <Route path="/resetPassword" element={<ResetPassword />} />
-                  <Route path="/product/:id" element={<ProductDesc />} />
-                  <Route path="/category/:id" element={<Homepage />} />
-                  <Route path="/privacy" element={<Privacy />} />
-                  <Route path="/terms" element={<Terms />} />
-                  <Route path="/payment" element={<Result />} />
-                  <Route path="/admin" element={<PrivateAdminRoute />}>
-                    <Route path="/admin" element={<Dashboard />} />
-                  </Route>
-                  <Route path="/userSetting" element={<PrivateRoute />}>
-                    <Route path="/userSetting" element={<ManageUser />} />
-                  </Route>
-                  <Route path="/AddProd" element={<PrivateRoute />}>
-                    <Route path="/AddProd" element={<ProductForm />} />
-                  </Route>
-                  <Route path="/EditProd/:id" element={<PrivateRoute />}>
-                    <Route path="/EditProd/:id" element={<ProductForm />} />
-                  </Route>
-                  <Route path="/cart" element={<PrivateRoute />}>
-                    <Route path="/cart" element={<Cart />} />
-                  </Route>
-                  <Route path="/inventory" element={<PrivateRoute />}>
-                    <Route path="/inventory" element={<User />} />
-                  </Route>
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
+              <Routes>
+                <Route path="/" element={<Homepage />} />
+                <Route path="/BuyPoints" element={<BuyPoints />} />
+                <Route path="/search" element={<SearchResults />} />
+                <Route path="/login" element={<Login />} />
+                <Route path="/adminLogin" element={<LoginAdmin />} />
+                <Route path="/signup" element={<SignUp />} />
+                <Route path="/confirmEmail" element={<ConfirmEmail />} />
+                <Route path="/forgotPassword" element={<ForgotPassword />} />
+                <Route path="/product/:id" element={<ProductDesc />} />
+                <Route path="/category/:id" element={<Homepage />} />
+                <Route path="/privacy" element={<Privacy />} />
+                <Route path="/terms" element={<Terms />} />
+
+                <Route path="/payment" element={<PrivateRoute />}>
+                  <Route index element={<Result />} />
+                </Route>
+                <Route path="/resetPassword" element={<PrivateRoute />}>
+                  <Route index element={<ResetPassword />} />
+                </Route>
+                <Route path="/admin" element={<PrivateAdminRoute />}>
+                  <Route index element={<Dashboard />} />
+                </Route>
+                <Route path="/userSetting" element={<PrivateRoute />}>
+                  <Route index element={<ManageUser />} />
+                </Route>
+                <Route path="/AddProd" element={<PrivateRoute />}>
+                  <Route index element={<ProductForm />} />
+                </Route>
+                <Route path="/EditProd/:id" element={<PrivateRoute />}>
+                  <Route index element={<ProductForm />} />
+                </Route>
+                <Route path="/cart" element={<PrivateRoute />}>
+                  <Route index element={<Cart />} />
+                </Route>
+                <Route path="/inventory" element={<PrivateRoute />}>
+                  <Route index element={<User />} />
+                </Route>
+                <Route path="*" element={<NotFound />} />
+              </Routes>
               <Footer />
             </BrowserRouter>
           </PointContext.Provider>
