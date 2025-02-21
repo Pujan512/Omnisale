@@ -1,6 +1,7 @@
 import { useLocation, useParams } from "react-router";
 import Category from "./categories/Category";
 import Product from "./products/Product";
+import Loading from "./Loading";
 import { useContext, useEffect } from "react";
 import { CategoryContext, ProductContext } from "../Context/OmniContext";
 
@@ -8,7 +9,7 @@ const Homepage = () => {
     const { products } = useContext(ProductContext);
     const { categories } = useContext(CategoryContext)
     const { id } = useParams() ?? "";
-    const category = categories.find(c => c.id == id)
+    const category = categories.find(c => c.id == id);
     const location = useLocation();
     const unsoldProducts = products.filter(p => !p.isSold);
 
@@ -20,10 +21,12 @@ const Homepage = () => {
         }, [700])
     }, [])
 
+    if(id && !category) return <section className="main self-center"><Loading /></section>
+
     return (
         <section className="main min-h-110.5">
                     <Product
-                        title={id ? "Category : " + category.name : "Our Products"}
+                        title={id ? "Category : " + category?.name : "Our Products"}
                         products={id ? unsoldProducts.filter(p => p.categoryId == id) : unsoldProducts}
                     />
 

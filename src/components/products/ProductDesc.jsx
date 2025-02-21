@@ -5,10 +5,12 @@ import Payment from "../Payment/Payment";
 import { getCoordinates } from "../Cart/maxDistance";
 import { getDistance } from "geolib";
 import Comments from "./Comments";
+import Loading from "../Loading";
 
 const ProductDesc = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
+    const [loading, setLoading] = useState(false);
     const [activeIndex, setActiveIndex] = useState(0);
     const [comments, setComments] = useState({});
     const [hasError, setHasError] = useState(false);
@@ -22,6 +24,7 @@ const ProductDesc = () => {
     const delivery = costOnDistance < 50 ? 50 : costOnDistance;
 
     const fetchProduct = async (id) => {
+        setLoading(true);
         const res = await fetch(import.meta.env.VITE_API_URL_PRODUCT + id);
         const data = await res.json();
         setProduct(data);
@@ -29,9 +32,6 @@ const ProductDesc = () => {
     }
 
     const handleAddCart = () => {
-        if (user == null) {
-            navigate("/login");
-        }
 
         const cartItem = {
             productId: product.id,
@@ -65,9 +65,14 @@ const ProductDesc = () => {
     }
 
     useEffect(() => {
-        fetchProduct(id);
+        try {
+            fetchProduct(id);
+        } finally {
+            setLoading(false);
+        }
     }, [])
 
+    if (loading) return <section className="main self-center"><Loading /></section>
     return (
         <article className="main">
             <article className="flex justify-between">
@@ -85,19 +90,19 @@ const ProductDesc = () => {
                 <section className="w-120 flex flex-col gap-8">
                     <article className="flex flex-col gap-5">
                         <div>
-                        <h2 className="text-4xl font-semibold">{product.name}</h2>
-                        <p className="text-blue-500 text-xl">{product.ownerName}</p>
-                        <p className="text-gray-500 text-md">{product.location?.split(',')[3].split(':')[1]}</p>
-                        <h3 className="text-2xl text-orange-400">Rs.{parseFloat(product.price).toFixed(2)} {(user && user != product.userId && product.delivery == 'Platform') && <span className="text-sm text-red-400">(Delivery: Rs.{delivery})</span>}</h3>
+                            <h2 className="text-4xl font-semibold">{product.name}</h2>
+                            <p className="text-blue-500 text-xl">{product.ownerName}</p>
+                            <p className="text-gray-500 text-md">{product.location?.split(',')[3].split(':')[1]}</p>
+                            <h3 className="text-2xl text-orange-400">Rs.{parseFloat(product.price).toFixed(2)} {(user && user != product.userId && product.delivery == 'Platform') && <span className="text-sm text-red-400">(Delivery: Rs.{delivery})</span>}</h3>
                         </div>
                         <div>
-                        <span className="font-semibold">Description:</span>
-                        <p className="max-h-55 break-normal overflow-y-scroll">{product.description?.split('\n').map((line, index) => (
-                            <span key={index}>
-                                {line}
-                                <br />
-                            </span>
-                        ))}</p>
+                            <span className="font-semibold">Description:</span>
+                            <p className="max-h-55 break-normal overflow-y-scroll">{product.description?.split('\n').map((line, index) => (
+                                <span key={index}>
+                                    {line}
+                                    <br />
+                                </span>
+                            ))}</p>
                         </div>
                     </article>
                     {!product.isSold && <>

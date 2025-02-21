@@ -4,7 +4,7 @@ import { getCurrentUser } from "../authService";
 const Footer = () => {
     
     return (
-        <footer className="bg-zinc-800 w-full text-white h-15 flex items-center justify-between px-10 relative bottom-0">
+        <footer className="bg-zinc-800 w-full text-white h-15 flex items-center justify-between px-10">
             <div className="flex flex-col items-center">
                 <p>Payment method</p>
                 <img src="/logo/Khalti_Logo_white.png" alt="logo" className="h-8 " />
