@@ -18,7 +18,6 @@ const Payment = ({price = 1, btnName = "Make Payment", order = "cart", orderId =
             })
 
             const result = await response.json();
-            console.log(result)
             if (result.payment_url) 
                 setPaymentUrl(result.payment_url);
         } catch (error) {
