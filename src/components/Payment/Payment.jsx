@@ -5,13 +5,13 @@ const Payment = ({price = 1, btnName = "Make Payment", order = "cart", orderId =
 
     const handlePayment = async () => {
         try {
-            const response = await fetch(import.meta.env.VITE_API_URL_PAYMENT, {
+            const response = await fetch(import.meta.env.VITE_API_URL_PAYMENT+ "initiate-payment", {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
 
                 }, body: JSON.stringify({
-                    "return_url": "https://omnisale.vercel.app//payment/",
+                    "return_url": "https://omnisale.vercel.app/payment/",
                     "website_url": "https://omnisale.vercel.app//",
                     "amount": `${price * 100}`,
                     "purchase_order_id": orderId,
