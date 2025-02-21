@@ -11,20 +11,14 @@ const Payment = ({price = 1, btnName = "Make Payment", order = "cart", orderId =
                     'Content-Type': 'application/json',
 
                 }, body: JSON.stringify({
-                    "return_url": "https://omnisale.vercel.app/payment/",
-                    "website_url": "https://omnisale.vercel.app//",
-                    "amount": `${price * 100}`,
-                    "purchase_order_id": orderId,
-                    "purchase_order_name": order,
-                    "customer_info": {
-                        "name": "Pujan Shrestha",
-                        "email": "shre***********10@gmail.com",
-                        "phone": "98******49"
-                    }
+                    amount: `${price * 100}`,
+                    orderId: orderId,
+                    orderName: order,
                 })
             })
 
             const result = await response.json();
+            console.log(result)
             if (result.payment_url) 
                 setPaymentUrl(result.payment_url);
         } catch (error) {
