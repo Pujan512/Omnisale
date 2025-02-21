@@ -52,8 +52,8 @@ const Login = () => {
                 {error && <p className="text-red-500">{error}</p>}
                 <input type="submit" value="Login" className="border-1 rounded-sm cursor-pointer w-20 p-2 text-red-500 hover:text-white hover:bg-red-500" />
             </form>
-            <p className={`${loading && hidden} text-sm`}>Don't have an account? <Link className="text-blue-600" to="/signup">Sign Up</Link></p>
-            <Link className={`${loading && hidden} text-sm text-blue-600`} to='/adminLogin'>Admin Login</Link>
+            <p className={`${loading && "hidden"} text-sm`}>Don't have an account? <Link className="text-blue-600" to="/signup">Sign Up</Link></p>
+            <Link className={`${loading && "hidden"} text-sm text-blue-600`} to='/adminLogin'>Admin Login</Link>
         </section>
     )
 }
