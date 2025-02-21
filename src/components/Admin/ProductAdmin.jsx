@@ -2,10 +2,20 @@ import { useContext } from "react"
 import { ProductContext } from "../../Context/OmniContext"
 
 export default function ProductAdmin() {
-    const {products} = useContext(ProductContext);
+    const { products, setProducts } = useContext(ProductContext);
+    const handleDelete = (id) => {
+        fetch(import.meta.env.VITE_API_URL_PRODUCT + id, {
+            headers: {
+                "Authorization": `Bearer ${document.cookie.split('=')[1]}`
+            },
+            method: "DELETE"
+        }).then(() => {
+            const newProducts = products.filter(p => p.id != id);
+            setProducts(newProducts);
+        }).catch(err => console.log(err))
+    }
     return (
         <section>
-            {console.log(products)}
             <table className="w-full table-auto">
                 <thead>
                     <tr className="text-center bg-gray-200">
