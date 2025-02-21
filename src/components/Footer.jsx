@@ -10,9 +10,9 @@ const Footer = () => {
                 <img src="/logo/Khalti_Logo_white.png" alt="logo" className="h-8 " />
             </div>
             <ul className="flex gap-10">
-                <li className="cursor-pointer hover:bg-gray-700 p-2">About Us</li>
-                <li className="cursor-pointer hover:bg-gray-700 p-2">Terms & Conditions</li>
-                <li className="cursor-pointer hover:bg-gray-700 p-2">Privacy Policy</li>
+                <li className="cursor-pointer hover:bg-gray-700 p-2"><Link to="/about">About Us</Link></li>
+                <li className="cursor-pointer hover:bg-gray-700 p-2"><Link to="/terms">Terms & Conditions</Link></li>
+                <li className="cursor-pointer hover:bg-gray-700 p-2"><Link to="/privacy">Privacy Policy</Link></li>
                 <li className="cursor-pointer hover:bg-gray-700 p-2">
                     <a href="mailto:omnisalemarket@gmail.com">Contact Us</a>
                 </li>

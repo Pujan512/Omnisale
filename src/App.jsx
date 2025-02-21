@@ -19,6 +19,7 @@ import ConfirmEmail from "./components/User/ConfirmEmail"
 import ResetPassword from "./components/User/ResetPassword"
 import ForgotPassword from "./components/User/ForgotPassword"
 import Footer from "./components/Footer"
+import About from "./components/Static/About"
 import Privacy from "./components/Static/Privacy"
 import Terms from "./components/Static/Terms"
 import NotFound from "./components/NotFound"
@@ -98,6 +99,7 @@ function App() {
                 <Route path="/category/:id" element={<Homepage />} />
                 <Route path="/privacy" element={<Privacy />} />
                 <Route path="/terms" element={<Terms />} />
+                <Route path="/about" element={<About />} />
 
                 <Route path="/payment" element={<PrivateRoute />}>
                   <Route index element={<Result />} />
