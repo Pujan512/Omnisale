@@ -18,9 +18,9 @@ const SearchResults = () => {
     const sortedProducts = [...filteredItems].sort((a, b) => {
         if (sort === 'Name') {
             return a.name.localeCompare(b.name);
-        }if (sort === 'Price') {
+        } if (sort === 'Price') {
             return a.price - b.price;
-        }if (sort === 'Data'){
+        } if (sort === 'Data') {
             return new Date(a.date) - new Date(b.date);
         }
         return 0;
@@ -31,10 +31,10 @@ const SearchResults = () => {
             {filteredItems.length > 0 ?
                 <article>
                     <section className="px-5 py-2 bg-gray-100 flex justify-between items-center">
-                        <p className="text-2xl text-semibold">Search Results:</p>
+                        <p className="text-xl lg:text-2xl text-semibold">Search Results:</p>
                         <form>
                             <label htmlFor="sort" className="mx-2">Sort By :</label>
-                            <select id="sort" name="sort" onChange={(e)=>setSort(e.target.value)}>
+                            <select id="sort" name="sort" onChange={(e) => setSort(e.target.value)}>
                                 <option disabled>Sort By:</option>
                                 <option value={'Name'}>Name</option>
                                 <option value={"Price"}>Price</option>
@@ -42,7 +42,9 @@ const SearchResults = () => {
                             </select><br />
                         </form>
                     </section>
-                    <section className="my-5 grid grid-cols-5 gap-10">
+                    <section className="my-3 lg:grid flex flex-wrap gap-5
+                                        lg:grid-cols-5 lg:gap-10 lg:my-5
+                    ">
                         {sortedProducts.map((product, index) => {
                             return <ProductCard
                                 key={index}
@@ -53,8 +55,8 @@ const SearchResults = () => {
                             />
                         })}
                     </section></article> :
-                <div className="flex justify-center pt-80 text-gray-500 md:pt-50">
-                    <p className="text-3xl md:text-5xl text-center">Nothing found, try searching again.</p>
+                <div className="flex justify-center pt-80 text-gray-500 lg:pt-50">
+                    <p className="text-3xl lg:text-5xl text-center">Nothing found, try searching again.</p>
                 </div>}
         </section>
     )

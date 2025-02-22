@@ -43,19 +43,19 @@ const Navbar = () => {
     }
 
     return (
-        <nav className="flex justify-between items-center bg-zinc-800 text-white sticky top-0 py-2 px-4 md:px-10 text-lg" >
-            <div className="flex gap-3 md:gap-5 items-center">
-                <div className="md:hidden rotate-90 text-3xl cursor-pointer " onClick={() => setHam(prev => prev == "|||" ? "X" : "|||")}>{ham}</div>
-                <Link className="cursor-pointer text-xl md:text-2xl" to="/">OmniSale</Link>
-                <Link className="hidden md:inline cursor-pointer" to="/" onClick={scrollToTop}>Home</Link>
-                <a href="/#category" className="hidden md:inline cursor-pointer" >Category</a>
+        <nav className="flex justify-between items-center bg-zinc-800 text-white sticky top-0 py-2 px-4 lg:px-10 text-lg" >
+            <div className="flex gap-3 lg:gap-5 items-center">
+                <div className="lg:hidden rotate-90 text-3xl cursor-pointer " onClick={() => setHam(prev => prev == "|||" ? "X" : "|||")}>{ham}</div>
+                <Link className="cursor-pointer text-xl lg:text-2xl" to="/">OmniSale</Link>
+                <Link className="hidden lg:inline cursor-pointer" to="/" onClick={scrollToTop}>Home</Link>
+                <a href="/#category" className="hidden lg:inline cursor-pointer" >Category</a>
             </div>
 
-            {ham == "X" && <div className={`md:hidden flex absolute left-0 top-14 w-full bg-zinc-600 flex-col items-center`}>
+            {ham == "X" && <div className={`lg:hidden flex absolute left-0 top-14 w-full bg-zinc-600 flex-col items-center`}>
                 <div className="p-2">
                     <div className="border-1 p-2 rounded-md min-w-sm flex">
                         <input className=" flex-auto px-5 focus:outline-none" type="text" placeholder="Search" ref={searchRefmd} onKeyDown={(e) => { if (e.key == 'Enter'){ handleSearch(searchRefmd); setHam("|||") }}} />
-                        <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={()=>handleSearch()}>
+                        <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={()=>{handleSearch(searchRefmd);setHam("|||") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                             </svg>
@@ -66,7 +66,7 @@ const Navbar = () => {
                 <a href="/#category" className="cursor-pointer hover:text-red-400 p-2" onClick={() => setHam("|||")}>Category</a>
             </div>}
 
-            <div className="hidden md:flex">
+            <div className="hidden lg:flex">
                 <div className="border-1 p-2 rounded-md min-w-sm flex">
                     <input className=" flex-auto px-5 focus:outline-none" type="text" placeholder="Search" ref={searchRefxl} onKeyDown={(e) => { if (e.key == 'Enter') handleSearch(searchRefxl) }} />
                     <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={()=>handleSearch(searchRefxl)}>
@@ -82,7 +82,7 @@ const Navbar = () => {
                         <Link className="pt-2 px-2 cursor-pointer" to={"/admin"}>Admin</Link>
                         <a className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md" onClick={() => { logout(); navigate('/'); window.location.reload() }}>Logout</a>
                     </> : <>
-                        <button className="text-red-400 border-1 font-semibold text-base md:text-xl rounded-md flex gap-2 pr-4 items-center hover:bg-red-500 hover:text-white cursor-pointer" onClick={() => navigate('/AddProd')}>
+                        <button className="text-red-400 border-1 font-semibold text-base lg:text-xl rounded-md flex gap-2 pr-4 items-center hover:bg-red-500 hover:text-white cursor-pointer" onClick={() => navigate('/AddProd')}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-plus inline " viewBox="0 0 16 16">
                                 <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4" />
                             </svg> Add
@@ -103,9 +103,9 @@ const Navbar = () => {
                 </div>
                 :
                 <div className="flex gap-2 text-base
-                                md:gap-5 md:text-xl md:w-60 md:relative md:justify-end md:right-0">
-                    <Link className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white md:px-4 px-3 py-2 rounded-md" to="/login" >Login</Link>
-                    <Link className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white md:px-4 px-3 py-2 rounded-md" to="/signup">Sign Up</Link>
+                                lg:gap-5 lg:text-xl lg:w-60 lg:relative lg:justify-end lg:right-0">
+                    <Link className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white lg:px-4 px-3 py-2 rounded-md" to="/login" >Login</Link>
+                    <Link className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white lg:px-4 px-3 py-2 rounded-md" to="/signup">Sign Up</Link>
                 </div>
             }
         </nav>

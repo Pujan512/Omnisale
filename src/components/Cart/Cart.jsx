@@ -25,11 +25,11 @@ const Cart = () => {
                     <thead>
                         <tr className="text-center bg-gray-100">
                             <th className="text-left">Product</th>
-                            <th className="text-left hidden md:flex">Name</th>
-                            <th className="w-[5vw] md:w-auto">Price (Rs.)</th>
+                            <th className="text-left hidden lg:flex">Name</th>
+                            <th className="w-[5vw] lg:w-auto">Price (Rs.)</th>
                             <th>Quantity</th>
                             <th></th>
-                            <th className="w-[5vw] md:w-auto">Sub Total</th>
+                            <th className="w-[5vw] lg:w-auto">Sub Total</th>
                         </tr>
                     </thead>
                     <tbody className="divide-y divide-gray-700 space-y-10">
@@ -54,7 +54,7 @@ const Cart = () => {
             </article>
 
             {cart.length == 0 || <article className="border-1 rounded-sm p-5 place-self-end flex flex-col">
-                <table className="md:w-75 w-[60vw] table-auto ">
+                <table className="lg:w-75 w-[60vw] table-auto ">
                     <tbody className="divide-y divide-gray-700 p-5">
                         <tr>
                             <td className="py-2">Sub Total</td>

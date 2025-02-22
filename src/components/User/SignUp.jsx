@@ -71,9 +71,9 @@ const SignUp = () => {
 
     return (
         <>
-            <section className={`main flex flex-col items-center pt-27 md:p-0`}>
+            <section className={`main flex flex-col items-center justify-center flex-1`}>
             {loading && <Loading />}
-                <form onSubmit={handleSubmit} className={`${loading && "hidden"} flex flex-col gap-2 md:w-110 bg-zinc-700 p-5 pb-10 rounded-md text-white text-sm`}>
+                <form onSubmit={handleSubmit} className={`${loading && "hidden"} flex flex-col gap-2 lg:w-110 bg-zinc-700 p-5 pb-10 rounded-md text-white text-sm`}>
                 <h2 className="text-2xl">Create an account</h2>
                     {formFields.filter(el => el != "confirmPassword").map((name, index) => (
                         <div key={name}>
@@ -114,7 +114,7 @@ const SignUp = () => {
                         <label htmlFor="terms" className="text-sm"> I hereby accept all the <Link className="text-blue-400" to='/terms'>Terms & Conditions</Link> of OmniSale.</label>
                     </div>
 
-                    <input type="submit" value="SignUp" className="border-1 rounded-sm cursor-pointer md:w-20 p-2 text-red-400 hover:text-white hover:bg-red-500" />
+                    <input type="submit" value="SignUp" className="border-1 rounded-sm cursor-pointer lg:w-20 p-2 text-red-400 hover:text-white hover:bg-red-500" />
                 </form>
                 <p className={`${loading && "hidden"} text-sm`}>Already have an account? <Link className="text-blue-600" to="/login">Log in</Link></p>
             </section>

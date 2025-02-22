@@ -18,7 +18,7 @@ const Homepage = () => {
             if (location.hash === '#category') {
                 document.getElementById('category').scrollIntoView();
             }
-        }, [700])
+        }, [1500])
     }, [])
 
     if(id && !category) return <section className="main self-center"><Loading /></section>

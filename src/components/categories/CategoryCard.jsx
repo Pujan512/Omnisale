@@ -8,9 +8,9 @@ const CategoryCard = ({imgSrc, name, id}) => {
         navigate(`/category/${id}`);
     }
     return (
-        <article className="w-[21.5vw] h-27 md:h-50 md:w-40 flex flex-col justify-center bg-zinc-200 p-2 rounded-md" onClick={() => handleClick(id)}>
-            <img src={imgSrc} alt={name} className="h-10 md:h-30 object-contain"/>
-            <p className="text-xs md:text-base text-center font-semibold">{name}</p>
+        <article className="w-[21.5vw] h-27 lg:h-50 lg:w-40 flex flex-col justify-center bg-zinc-200 p-2 rounded-md" onClick={() => handleClick(id)}>
+            <img src={imgSrc} alt={name} className="h-10 lg:h-30 object-contain"/>
+            <p className="text-xs lg:text-base text-center font-semibold">{name}</p>
         </article>
     )
 }

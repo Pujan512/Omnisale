@@ -31,7 +31,7 @@ const Login = () => {
     };
 
     return (
-        <section className={`main flex flex-col items-center pt-50 md:pt-22`}>
+        <section className={`main flex flex-col items-center justify-center flex-1`}>
             {loading && <Loading />}
             <form onSubmit={handleSubmit} className={`${loading && "hidden"} flex flex-col gap-2 w-85 bg-zinc-700 p-5 pb-10 rounded-md text-white text-sm`}>
                 <h2 className="text-3xl py-2">Login</h2>

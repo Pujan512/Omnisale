@@ -75,19 +75,19 @@ const ProductDesc = () => {
     if (loading) return <section className="main self-center"><Loading /></section>
     return (
         <article className="main">
-            <article className="flex flex-col md:flex-row md:justify-between">
+            <article className="flex flex-col lg:flex-row lg:justify-between">
                 <section>
                     {product.imageNames && product.imageNames.length > 0 &&
                         <>
-                            <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[activeIndex]} className="hidden md:flex md:w-160 md:h-90 md:object-contain bg-zinc-200 p-4 mb-4" />
-                            <div className="flex gap-5 w-[90vw] md:w-150 overflow-x-scroll snap-x snap-mandatory pb-10 md:p-0">
+                            <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[activeIndex]} className="hidden lg:flex lg:w-160 lg:h-90 lg:object-contain bg-zinc-200 p-4 mb-4" />
+                            <div className="flex gap-5 w-[90vw] lg:w-150 overflow-x-scroll snap-x snap-mandatory pb-10 lg:p-0">
                                 {product?.imageNames.map((image, index) =>
-                                    <img key={index} src={import.meta.env.VITE_API_URL_IMAGE + image} className="snap-start h-[40vh] w-[95vw] md:w-30 md:h-20 object-contain bg-zinc-200 p-4 md:p-2" onClick={() => setActiveIndex(index)} />
+                                    <img key={index} src={import.meta.env.VITE_API_URL_IMAGE + image} className="snap-start h-[40vh] w-[95vw] lg:w-30 lg:h-20 object-contain bg-zinc-200 p-4 lg:p-2" onClick={() => setActiveIndex(index)} />
                                 )}
                             </div>
                         </>}
                 </section>
-                <section className="md:w-120 flex flex-col gap-8">
+                <section className="lg:w-120 flex flex-col gap-8">
                     <article className="flex flex-col gap-5">
                         <div>
                             <h2 className="text-4xl font-semibold">{product.name}</h2>
@@ -97,7 +97,7 @@ const ProductDesc = () => {
                         </div>
                         <div>
                             <span className="font-semibold text-xl">Description:</span>
-                            <p className="md:max-h-55 break-normal overflow-y-scroll text-lg">{product.description?.split('\n').map((line, index) => (
+                            <p className="lg:max-h-55 break-normal overflow-y-scroll text-lg">{product.description?.split('\n').map((line, index) => (
                                 <span key={index}>
                                     {line}
                                     <br />
@@ -107,7 +107,7 @@ const ProductDesc = () => {
                     </article>
                     {!product.isSold && <>
                         {(user && user != product.userId) && <div><hr className="mb-5" />
-                            <article className="flex md:gap-10 gap-5">
+                            <article className="flex lg:gap-10 gap-5">
                                 <a className="flex flex-1 justify-center cursor-pointer border-1 p-2 rounded-md text-center bg-zinc-700 text-white hover:bg-zinc-600" onClick={() => handleAddCart()}>Add to Cart</a>
                                 <Payment price={parseFloat(product.price + delivery).toFixed(2)} btnName="Buy Now" order="individual" orderId={product.id} />
                             </article></div>}
@@ -115,7 +115,7 @@ const ProductDesc = () => {
                 </section>
             </article>
             {!product.isSold && <>
-                <hr className="my-5 md:my-10" />
+                <hr className="my-5 lg:my-10" />
                 <Comments comments={comments} setComments={setComments} productId={product.id} /></>}
         </article>
     )

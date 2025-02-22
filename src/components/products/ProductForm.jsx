@@ -112,18 +112,18 @@ const ProductForm = () => {
     )), [categories]);
 
     return (
-        <section className="main flex justify-center">
-            <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex bg-zinc-700 flex-col gap-4 w-150 px-10 py-5 text-white rounded-sm">
-            <p className="text-2xl font-semibold text-center">Enter Product Details</p>
-                {/* ProductName */}
-                <div className="flex items-center justify-between">
-                    <article>
+        <section className="main flex justify-center flex-1">
+            <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex bg-zinc-700 flex-col gap-4 p-5 lg:w-150 lg:px-10 lg:py-5 text-white rounded-sm">
+                <p className="text-2xl font-semibold text-center">Enter Product Details</p>
+                <div className="flex flex-col lg:flex-row items-center justify-between">
+                    {/* ProductName */}
+                    <article className="w-full">
                         <label htmlFor="name">Name: </label>
-                        <input id="name" required name="name" type="text" value={formData.name} className="border-1 p-2 w-60" onChange={handleChange} /><br />
-                    </article><article>
+                        <input id="name" required name="name" type="text" value={formData.name} className="border-1 p-2 w-full lg:w-60" onChange={handleChange} /><br />
+                    </article><article className="w-full">
                         {/* ProductPrice */}
                         <label htmlFor="price">Price: </label>
-                        <input id="price" required name="price" type="number" value={formData.price} className="border-1 p-2 w-60" onChange={handleChange} /><br />
+                        <input id="price" required name="price" type="number" value={formData.price} className="border-1 w-full p-2 lg:w-60" onChange={handleChange} /><br />
                     </article>
                 </div><div>
                     {/* ProductCategory */}
@@ -138,12 +138,12 @@ const ProductForm = () => {
                     <input type="file" id="images" required multiple accept="image/*" name="imgSrc" onChange={handleFileChange}
                         className=" text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
                     /><br />
-                </div><div className="flex justify-between items-center">
-                    <article>
+                </div><div className="flex flex-col lg:flex-row justify-between items-center">
+                    <article className="w-full">
                         {/*Available Quantity*/}
                         <label htmlFor="available">Available Quantity: </label>
                         <input className="border-1 p-2 ml-5 w-15" type="number" name="available" id="available" onChange={handleChange} value={formData.available} />
-                    </article><article className="flex gap-2">
+                    </article><article className="flex gap-2 w-full">
                         {/*Delivery*/}
                         <label>Delivery: </label>
                         <input type="radio" name="delivery" id="self" value="Self" onChange={handleChange} checked={formData.delivery == "Self"} />
@@ -155,7 +155,7 @@ const ProductForm = () => {
 
                     {/* ProductDescription */}
                     <label htmlFor="description">Description: </label><br />
-                    <textarea required className="border-1 p-2 w-full"  rows={10}
+                    <textarea required className="border-1 p-2 w-full" rows={10}
                         name="description" id="description" onChange={handleChange} value={formData.description}></textarea>
                 </div>
                 <input type="submit" value={id ? "Update" : "Add(-20pts)"} className="cursor-pointer rounded-md border-1 hover:text-white text-red-500 py-2 px-4 hover:bg-red-500" />

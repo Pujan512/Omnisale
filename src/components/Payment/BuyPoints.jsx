@@ -6,7 +6,7 @@ const BuyPoints = () => {
     const prices = [10, 50, 100, 500];
     return (
         <div className="flex justify-center main items-center">
-            <section className="md:w-100 bg-zinc-700 p-5 pb-10 rounded-md text-white relative mt-[25vh] md:mt-[15vh]" >
+            <section className="lg:w-100 bg-zinc-700 p-5 pb-10 rounded-md text-white relative mt-[25vh] lg:mt-[15vh]" >
                 <h2 className="text-3xl text-center mb-5">Buy Points</h2>
                 <Link className="text-red-500 absolute right-5 top-5 cursor-pointer" to="/">
                     <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" className="bi bi-x-square z-0" viewBox="0 0 16 16">

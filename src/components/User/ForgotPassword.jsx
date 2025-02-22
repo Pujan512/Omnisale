@@ -41,7 +41,7 @@ export default function ForgotPassword() {
             <form onSubmit={handleSubmit} className={` ${loading && "hidden"}`}>
                 <p className="text-sm py-3">Forgot your account's password? Enter your email address and we'll send you an OTP to recover your email.</p>
                 <div className="flex flex-col gap-2">
-                    <input className="border-1 md:w-100 p-2 rounded-sm" type="email" placeholder="Email" ref={emailRef} />
+                    <input className="border-1 lg:w-100 p-2 rounded-sm" type="email" placeholder="Email" ref={emailRef} />
                 {error && <p className="text-red-700">{error}</p>}
                     <input className="border-1 p-2 cursor-pointer rounded-sm size-fit text-red-500 hover:bg-red-500 hover:text-white" type="submit" value="Send OTP" />
                 </div>

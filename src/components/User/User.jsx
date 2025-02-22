@@ -16,11 +16,12 @@ const User = () => {
     }
 
     return (
-        <section className="flex min-h-135">
+        <section className="flex flex-1 flex-col lg:flex-row">
             <aside className="px-10 py-5 text-zinc-700 bg-gray-200">
                 <nav>
-                    <ul className="flex flex-col gap-5 text-xl">
+                    <ul className="flex justify-between lg:flex-col gap-5 text-xl">
                         <li className={`${(active == 'B')?"text-red-600":""} cursor-pointer`} onClick={() => setActive('B')}>My Products</li>
+                        <li className="lg:hidden">|</li>
                         <li className={`${(active == 'C')?"text-red-600":""} cursor-pointer`} onClick={() => setActive('C')}>My Orders</li>
                     </ul>
                 </nav>
