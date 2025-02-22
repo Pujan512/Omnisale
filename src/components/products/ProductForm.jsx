@@ -76,6 +76,7 @@ const ProductForm = () => {
                         p.id === id ? { ...newProduct, id } : p
                     );
                     setProducts(updatedProducts);
+                    navigate('/');
                 } else {
                     setProducts([...products, data]);
                     fetch(import.meta.env.VITE_API_URL_POINT + userId, {
@@ -88,10 +89,9 @@ const ProductForm = () => {
                     }).then(res => res.json())
                         .then(pts => {
                             setPoint(pts.value)
+                            navigate('/');
                         }).catch(err => console.log(err))
                 }
-                navigate('/');
-                window.location.reload();
             }).catch(err => {
                 console.log(err);
             });
