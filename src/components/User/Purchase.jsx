@@ -6,7 +6,11 @@ const Purchase = () => {
     const navigate = useNavigate();
 
     useState(()=>{
-        fetch(import.meta.env.VITE_API_URL_ORDER + sessionStorage.getItem('user'))
+        fetch(import.meta.env.VITE_API_URL_ORDER + sessionStorage.getItem('user'),{
+            headers: {
+                "Authorization": `Bearer ${document.cookie.split('=')[1]}`
+            }
+        })
         .then(res => res.json())
         .then(data => setOrders(data));
     },[])
