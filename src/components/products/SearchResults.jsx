@@ -53,8 +53,8 @@ const SearchResults = () => {
                             />
                         })}
                     </section></article> :
-                <div className="flex justify-center pt-40 text-gray-500">
-                    <p className="text-5xl">Nothing found, try searching again.</p>
+                <div className="flex justify-center pt-80 text-gray-500 md:pt-50">
+                    <p className="text-3xl md:text-5xl text-center">Nothing found, try searching again.</p>
                 </div>}
         </section>
     )

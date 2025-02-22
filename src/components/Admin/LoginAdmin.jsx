@@ -27,7 +27,7 @@ const LoginAdmin = () => {
     }
 
     return (
-        <section className="main flex flex-col h-110.5 justify-center items-center">
+        <section className="main flex flex-col pt-65 md:pt-30 justify-center items-center">
             {loading && <Loading />}
             <form onSubmit={handleSubmit} className={`${loading && "hidden"} flex flex-col gap-2 w-85 bg-zinc-700 p-5 pb-10 rounded-md text-white text-sm`}>
                 <h2 className="text-3xl py-2">Admin Login</h2>
@@ -44,7 +44,7 @@ const LoginAdmin = () => {
                     </div>
                 ))}
                 {error && <p className="text-red-500">{error}</p>}
-                <input type="submit" value="Login" className="border-1 rounded-sm cursor-pointer w-20 p-2 text-red-500 hover:text-white hover:bg-red-500" />
+                <input type="submit" value="Login" className="border-1 rounded-sm cursor-pointer p-2 text-red-500 hover:text-white hover:bg-red-500" />
             </form>
         </section>
     )

@@ -3,6 +3,7 @@ import UserAdmin from "./UserAdmin";
 import CategoryAdmin from "./CategoryAdmin";
 import ProductAdmin from "./ProductAdmin";
 import OrderAdmin from "./OrderAdmin";
+import ManageUser from "../User/ManageUser";
 
 const Dashboard = () => {
 
@@ -17,6 +18,8 @@ const Dashboard = () => {
                 return <ProductAdmin />;
             case 'D':
                 return <OrderAdmin />;
+            case 'E':
+                return <ManageUser />;
         }
     }
 
@@ -29,6 +32,7 @@ const Dashboard = () => {
                         <li className={`${(active == 'B')?"text-red-600":""} cursor-pointer`} onClick={() => setActive('B')}>Manage Categories</li>
                         <li className={`${(active == 'C')?"text-red-600":""} cursor-pointer`} onClick={() => setActive('C')}>Manage Products</li>
                         <li className={`${(active == 'D')?"text-red-600":""} cursor-pointer`} onClick={() => setActive('D')}>Manage Orders</li>
+                        <li className={`${(active == 'E')?"text-red-600":""} cursor-pointer`} onClick={() => setActive('E')}>Change Password</li>
                     </ul>
                 </nav>
             </aside>

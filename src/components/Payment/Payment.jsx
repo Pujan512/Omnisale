@@ -27,7 +27,7 @@ const Payment = ({price = 1, btnName = "Make Payment", order = "cart", orderId =
 
 
     return (
-        <div className="flex justify-center bg-purple-800 rounded-md text-white cursor-pointer">
+        <div className="flex flex-1 justify-center bg-purple-800 rounded-md text-white cursor-pointer">
             {paymentUrl ?
              <a className='p-2' href={paymentUrl}>Pay with Khalti</a> :
             <button className="w-full rounded-md p-2 cursor-pointer bg-red-500" onClick={handlePayment}>{btnName}</button>

@@ -24,7 +24,7 @@ const Homepage = () => {
     if(id && !category) return <section className="main self-center"><Loading /></section>
 
     return (
-        <section className="main min-h-110.5">
+        <section className="main">
                     <Product
                         title={id ? "Category : " + category?.name : "Our Products"}
                         products={id ? unsoldProducts.filter(p => p.categoryId == id) : unsoldProducts}

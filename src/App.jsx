@@ -95,6 +95,7 @@ function App() {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/confirmEmail" element={<ConfirmEmail />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
+                <Route path="/resetPassword" element={<ResetPassword />} />
                 <Route path="/product/:id" element={<ProductDesc />} />
                 <Route path="/category/:id" element={<Homepage />} />
                 <Route path="/privacy" element={<Privacy />} />
@@ -103,9 +104,6 @@ function App() {
 
                 <Route path="/payment" element={<PrivateRoute />}>
                   <Route index element={<Result />} />
-                </Route>
-                <Route path="/resetPassword" element={<PrivateRoute />}>
-                  <Route index element={<ResetPassword />} />
                 </Route>
                 <Route path="/admin" element={<PrivateAdminRoute />}>
                   <Route index element={<Dashboard />} />
