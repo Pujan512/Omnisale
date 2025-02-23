@@ -28,7 +28,7 @@ const CartCard = ({ name, price, id, imgSrc, setCart, cart, setTotal, quantity, 
 
     return (
         <tr className="text-center">
-            <td className="relative flex flex-col py-4"><img src={imgSrc} alt={name} className="cursor-pointer lg:m-0 py-1 lg:py-3 size-fit lg:h-auto w-20 lg:w-30 object-contain" onClick={() => { navigate("/product/" + productId) }}/>
+            <td className="relative flex flex-col py-4"><img src={imgSrc} alt={name} className="cursor-pointer lg:m-0 py-1 lg:py-3 size-fit lg:h-auto w-20 lg:w-30 object-contain" loading="lazy" onClick={() => { navigate("/product/" + productId) }}/>
                 <div className="text-red-500 absolute top-2 left-22 hover:bg-gray-200 p-1 cursor-pointer" onClick={() => handleDelete(id)}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-trash lg:hidden" viewBox="0 0 16 16">
                         <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z" />

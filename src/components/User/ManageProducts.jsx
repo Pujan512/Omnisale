@@ -37,7 +37,7 @@ const ManageProducts = () => {
                     {myProducts.map((product, index) => {
                         return <tr key={index}>
                             <td onClick={() => navigate("/product/" + product.id)}>
-                                <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[0]} alt={product.name} className="py-3 h-20 w-20 object-contain cursor-pointer" />
+                                <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[0]} alt={product.name} className="py-3 h-20 w-20 object-contain cursor-pointer" loading="lazy"/>
                                 <span className="lg:hidden text-center break-words">{product.name}</span>
                             </td>
                             <td onClick={() => navigate("/product/" + product.id)} className="hidden lg:table-cell text-left p-2 cursor-pointer"><span className="break-words">{product.name}</span></td>

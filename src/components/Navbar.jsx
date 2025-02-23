@@ -51,7 +51,7 @@ const Navbar = () => {
                 <a href="/#category" className="hidden lg:inline cursor-pointer" >Category</a>
             </div>
 
-            {ham == "X" && <div className={`lg:hidden flex absolute left-0 top-14 w-full bg-zinc-600 flex-col items-center`}>
+            {ham == "X" && <div className={`lg:hidden flex absolute left-0 top-14 w-full bg-zinc-600 flex-col items-center z-99`}>
                 <div className="p-2">
                     <div className="border-1 p-2 rounded-md min-w-sm flex">
                         <input className=" flex-auto px-5 focus:outline-none" type="text" placeholder="Search" ref={searchRefmd} onKeyDown={(e) => { if (e.key == 'Enter'){ handleSearch(searchRefmd); setHam("|||") }}} />
@@ -64,6 +64,7 @@ const Navbar = () => {
                 </div>
                 <Link className="hover:text-red-400" to="/" onClick={() => { scrollToTop(); setHam("|||") }}>Home</Link>
                 <a href="/#category" className="cursor-pointer hover:text-red-400 p-2" onClick={() => setHam("|||")}>Category</a>
+                <Link className="pb-2" to="/about" onClick={() => setHam("|||")}>About Us</Link>
             </div>}
 
             <div className="hidden lg:flex">

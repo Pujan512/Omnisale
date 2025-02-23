@@ -19,24 +19,24 @@ const Purchase = () => {
         <section>
             <table className="w-full table-auto">
                 <thead>
-                    <tr className="text-left">
-                        <th>S.N.</th>
+                    <tr className="text-left bg-gray-200">
+                        <th className="hidden lg:table-cell">S.N.</th>
                         <th>OrderId</th>
-                        <th>Product(s)</th>
-                        <th>Total Amount</th>
+                        <th className="pl-3">Product(s)</th>
                         <th>Status</th>
-                        <th>Delivery</th>
+                        <th className="pl-2">Amount</th>
+                        <th className="hidden lg:table-cell">Delivery</th>
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-500">
                     {orders.map((order, index) => {
                         return <tr key={index}>
-                            <td className="py-2">{index + 1}</td>
-                            <td>{order.id}</td>
-                            <td>{order.orderItems.map((oi, i) => <a key={i} className="text-blue-700 cursor-pointer" onClick={() => navigate('/product/'+oi.product.id)}>{oi.product.name}<br /></a>)}</td>
-                            <td>{order.totalAmount}</td>
+                            <td className="py-2 hidden lg:table-cell">{index + 1}</td>
+                            <td>ODR00{order.id}</td>
+                            <td className="pl-3">{order.orderItems.map((oi, i) => <a key={i} className="text-blue-700 cursor-pointer" onClick={() => navigate('/product/'+oi.product.id)}>{oi.product.name}<br /></a>)}</td>
                             <td>{order.status}</td>
-                            <td>{order.orderItems.filter(oi => oi.product.delivery == "Platform") ? "Platform": "Seller"}</td>
+                            <td className="pl-2">{order.totalAmount}</td>
+                            <td className="hidden lg:table-cell">{order.orderItems.filter(oi => oi.product.delivery == "Platform") ? "Platform": "Seller"}</td>
                         </tr>
                     })}
                 </tbody>

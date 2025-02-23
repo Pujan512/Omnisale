@@ -79,10 +79,10 @@ const ProductDesc = () => {
                 <section>
                     {product.imageNames && product.imageNames.length > 0 &&
                         <>
-                            <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[activeIndex]} className="hidden lg:flex lg:w-160 lg:h-90 lg:object-contain bg-zinc-200 p-4 mb-4" />
+                            <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[activeIndex]} className="hidden lg:flex lg:w-160 lg:h-90 lg:object-contain bg-zinc-200 p-4 mb-4" loading="lazy"/>
                             <div className="flex gap-5 w-[90vw] lg:w-150 overflow-x-scroll snap-x snap-mandatory pb-10 lg:p-0">
                                 {product?.imageNames.map((image, index) =>
-                                    <img key={index} src={import.meta.env.VITE_API_URL_IMAGE + image} className="snap-start h-[40vh] w-[95vw] lg:w-30 lg:h-20 object-contain bg-zinc-200 p-4 lg:p-2" onClick={() => setActiveIndex(index)} />
+                                    <img key={index} src={import.meta.env.VITE_API_URL_IMAGE + image} className="snap-start h-[40vh] w-[95vw] lg:w-30 lg:h-20 object-contain bg-zinc-200 p-4 lg:p-2" onClick={() => setActiveIndex(index)} loading="lazy"/>
                                 )}
                             </div>
                         </>}
