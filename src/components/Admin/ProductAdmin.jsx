@@ -23,7 +23,7 @@ export default function ProductAdmin() {
                         <th>Product Id</th>
                         <th>Product</th>
                         <th>Owner Id</th>
-                        <th>Price</th>
+                        <th>Price(Rs.)</th>
                         <th>Sold</th>
                         <th>Delivery</th>
                         <th></th>

@@ -45,17 +45,19 @@ const Navbar = () => {
     return (
         <nav className="flex justify-between items-center bg-zinc-800 text-white sticky top-0 py-2 px-4 lg:px-10 text-lg" >
             <div className="flex gap-3 lg:gap-5 items-center">
-                <div className="lg:hidden rotate-90 text-3xl cursor-pointer " onClick={() => setHam(prev => prev == "|||" ? "X" : "|||")}>{ham}</div>
-                <Link className="cursor-pointer text-xl lg:text-2xl" to="/">OmniSale</Link>
+                <div className="lg:hidden rotate-90 text-3xl cursor-pointer" onClick={() => setHam(prev => prev == "|||" ? <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" className="bi bi-x-lg" viewBox="0 0 16 16">
+                    <path d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8z" />
+                </svg> : "|||")}>{ham}</div>
+                <Link className="cursor-pointer text-xl lg:text-2xl" to="/"><img className="h-10" src="/OmniLogo.png" alt="logo"/></Link>
                 <Link className="hidden lg:inline cursor-pointer" to="/" onClick={scrollToTop}>Home</Link>
                 <a href="/#category" className="hidden lg:inline cursor-pointer" >Category</a>
             </div>
 
-            {ham == "X" && <div className={`lg:hidden flex absolute left-0 top-14 w-full bg-zinc-600 flex-col items-center z-99`}>
+            {ham != "|||" && <div className={`lg:hidden flex absolute left-0 top-14 w-full bg-zinc-600 flex-col items-center z-99`}>
                 <div className="p-2">
                     <div className="border-1 p-2 rounded-md min-w-sm flex">
-                        <input className=" flex-auto px-5 focus:outline-none" type="text" placeholder="Search" ref={searchRefmd} onKeyDown={(e) => { if (e.key == 'Enter'){ handleSearch(searchRefmd); setHam("|||") }}} />
-                        <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={()=>{handleSearch(searchRefmd);setHam("|||") }}>
+                        <input className=" flex-auto px-5 focus:outline-none" type="text" placeholder="Search" ref={searchRefmd} onKeyDown={(e) => { if (e.key == 'Enter') { handleSearch(searchRefmd); setHam("|||") } }} />
+                        <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={() => { handleSearch(searchRefmd); setHam("|||") }}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                                 <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                             </svg>
@@ -70,7 +72,7 @@ const Navbar = () => {
             <div className="hidden lg:flex">
                 <div className="border-1 p-2 rounded-md min-w-sm flex">
                     <input className=" flex-auto px-5 focus:outline-none" type="text" placeholder="Search" ref={searchRefxl} onKeyDown={(e) => { if (e.key == 'Enter') handleSearch(searchRefxl) }} />
-                    <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={()=>handleSearch(searchRefxl)}>
+                    <button className="cursor-pointer hover:bg-zinc-600 rounded-full p-2" onClick={() => handleSearch(searchRefxl)}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0" />
                         </svg>
