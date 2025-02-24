@@ -78,7 +78,7 @@ function App() {
       fetchPoint(sessionStorage.getItem("user"));
     }
     if(!document.cookie)
-    sessionStorage.clear()
+      sessionStorage.clear()
   }, [])
 
   return (
