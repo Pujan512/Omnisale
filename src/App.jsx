@@ -77,6 +77,8 @@ function App() {
       fetchCart(sessionStorage.getItem("user"));
       fetchPoint(sessionStorage.getItem("user"));
     }
+    if(!document.cookie)
+    sessionStorage.clear()
   }, [])
 
   return (
