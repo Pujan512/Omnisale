@@ -10,7 +10,7 @@ import Loading from "../Loading";
 const ProductDesc = () => {
     const { id } = useParams();
     const [product, setProduct] = useState({});
-    const [loading, setLoading] = useState(false);
+    const [loading, setLoading] = useState(true);
     const [activeIndex, setActiveIndex] = useState(0);
     const [comments, setComments] = useState({});
     const [hasError, setHasError] = useState(false);
@@ -65,24 +65,23 @@ const ProductDesc = () => {
     }
 
     useEffect(() => {
-        try {
-            fetchProduct(id);
-        } finally {
+        (async function () {
+            await fetchProduct(id);
             setLoading(false);
-        }
+        })()
     }, [])
 
-    if (loading) return <section className="main self-center"><Loading /></section>
+    if (loading) return <section className="flex flex-1 justify-center items-center"><Loading /></section>
     return (
         <article className="main">
             <article className="flex flex-col lg:flex-row lg:justify-between">
                 <section>
                     {product.imageNames && product.imageNames.length > 0 &&
                         <>
-                            <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[activeIndex]} className="hidden lg:flex lg:w-160 lg:h-90 lg:object-contain bg-zinc-200 p-4 mb-4" loading="lazy"/>
+                            <img src={import.meta.env.VITE_API_URL_IMAGE + product.imageNames[activeIndex]} className="hidden lg:flex lg:w-160 lg:h-90 lg:object-contain bg-zinc-200 p-4 mb-4" loading="lazy" />
                             <div className="flex gap-5 w-[90vw] lg:w-150 overflow-x-scroll snap-x snap-mandatory pb-10 lg:p-0">
                                 {product?.imageNames.map((image, index) =>
-                                    <img key={index} src={import.meta.env.VITE_API_URL_IMAGE + image} className="snap-start h-[40vh] w-[95vw] lg:w-30 lg:h-20 object-contain bg-zinc-200 p-4 lg:p-2" onClick={() => setActiveIndex(index)} loading="lazy"/>
+                                    <img key={index} src={import.meta.env.VITE_API_URL_IMAGE + image} className="snap-start h-[40vh] w-[95vw] lg:w-30 lg:h-20 object-contain bg-zinc-200 p-4 lg:p-2" onClick={() => setActiveIndex(index)} loading="lazy" />
                                 )}
                             </div>
                         </>}
@@ -111,7 +110,7 @@ const ProductDesc = () => {
                                 <a className="flex flex-1 justify-center cursor-pointer border-1 p-2 rounded-md text-center bg-zinc-700 text-white hover:bg-zinc-600" onClick={() => handleAddCart()}>Add to Cart</a>
                                 <Payment price={parseFloat(product.price + delivery).toFixed(2)} btnName="Buy Now" order="individual" orderId={product.id} />
                             </article></div>}
-                            {hasError ? <p className="text-red-600 relative -top-8">This product is already in cart!</p>:<></>}</>}
+                        {hasError ? <p className="text-red-600 relative -top-8">This product is already in cart!</p> : <></>}</>}
                 </section>
             </article>
             {!product.isSold && <>

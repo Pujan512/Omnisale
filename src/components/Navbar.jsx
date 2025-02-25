@@ -83,7 +83,7 @@ const Navbar = () => {
                 <div className="flex gap-2">
                     {text == "PujanNirjala" ? <>
                         <Link className="pt-2 px-2 cursor-pointer" to={"/admin"}>Admin</Link>
-                        <a className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md" onClick={() => { logout(); navigate('/'); window.location.reload() }}>Logout</a>
+                        <a className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md" onClick={() => { logout(); navigate('/'); }}>Logout</a>
                     </> : <>
                         <button className="text-red-400 border-1 font-semibold text-base lg:text-xl rounded-md flex gap-2 pr-4 items-center hover:bg-red-500 hover:text-white cursor-pointer" onClick={() => navigate('/AddProd')}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-plus inline " viewBox="0 0 16 16">

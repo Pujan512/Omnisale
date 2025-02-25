@@ -25,12 +25,14 @@ import Terms from "./components/Static/Terms"
 import NotFound from "./components/NotFound"
 import Dashboard from "./components/Admin/Dashboard"
 import PrivateAdminRoute from "./components/Admin/PrivateAdminRoute"
+import Loading from "./components/Loading"
 
 function App() {
   const [cart, setCart] = useState([]);
   const [point, setPoint] = useState(null);
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [loading, setLoading] = useState(true);
   const productContextValue = useMemo(() => ({ products, setProducts }), [products])
 
   const fetchProducts = async () => {
@@ -51,6 +53,7 @@ function App() {
     const data = await res.json()
     setCategories(data);
   }
+
   const fetchCart = async (userId) => {
     const res = await fetch(import.meta.env.VITE_API_URL_CART + userId, {
       headers: {
@@ -60,6 +63,7 @@ function App() {
     const data = await res.json()
     setCart(data.cartItems);
   }
+
   const fetchPoint = async (userId) => {
     const res = await fetch(import.meta.env.VITE_API_URL_POINT + userId, {
       headers: {
@@ -71,13 +75,16 @@ function App() {
   }
 
   useEffect(() => {
-    fetchProducts();
-    fetchCategories();
+      (async function(){  
+        await fetchProducts();
+        await fetchCategories();
+        setLoading(false);
+      })()
     if (document.cookie) {
       fetchCart(sessionStorage.getItem("user"));
       fetchPoint(sessionStorage.getItem("user"));
     }
-    if(!document.cookie)
+    if (!document.cookie)
       sessionStorage.clear()
   }, [])
 
@@ -88,45 +95,47 @@ function App() {
           <PointContext.Provider value={{ point, setPoint }}>
             <BrowserRouter>
               <Navbar />
-              <Routes>
-                <Route path="/" element={<Homepage />} />
-                <Route path="/BuyPoints" element={<BuyPoints />} />
-                <Route path="/search" element={<SearchResults />} />
-                <Route path="/login" element={<Login />} />
-                <Route path="/adminLogin" element={<LoginAdmin />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/confirmEmail" element={<ConfirmEmail />} />
-                <Route path="/forgotPassword" element={<ForgotPassword />} />
-                <Route path="/resetPassword" element={<ResetPassword />} />
-                <Route path="/product/:id" element={<ProductDesc />} />
-                <Route path="/category/:id" element={<Homepage />} />
-                <Route path="/privacy" element={<Privacy />} />
-                <Route path="/terms" element={<Terms />} />
-                <Route path="/about" element={<About />} />
+              {loading ? <div className="main flex flex-1 items-center justify-center"><Loading /></div> :
+                <Routes>
+                  <Route path="/" element={<Homepage />} />
+                  <Route path="/BuyPoints" element={<BuyPoints />} />
+                  <Route path="/search" element={<SearchResults />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/adminLogin" element={<LoginAdmin />} />
+                  <Route path="/signup" element={<SignUp />} />
+                  <Route path="/confirmEmail" element={<ConfirmEmail />} />
+                  <Route path="/forgotPassword" element={<ForgotPassword />} />
+                  <Route path="/resetPassword" element={<ResetPassword />} />
+                  <Route path="/product/:id" element={<ProductDesc />} />
+                  <Route path="/category/:id" element={<Homepage />} />
+                  <Route path="/privacy" element={<Privacy />} />
+                  <Route path="/terms" element={<Terms />} />
+                  <Route path="/about" element={<About />} />
 
-                <Route path="/payment" element={<PrivateRoute />}>
-                  <Route index element={<Result />} />
-                </Route>
-                <Route path="/admin" element={<PrivateAdminRoute />}>
-                  <Route index element={<Dashboard />} />
-                </Route>
-                <Route path="/userSetting" element={<PrivateRoute />}>
-                  <Route index element={<ManageUser />} />
-                </Route>
-                <Route path="/AddProd" element={<PrivateRoute />}>
-                  <Route index element={<ProductForm />} />
-                </Route>
-                <Route path="/EditProd/:id" element={<PrivateRoute />}>
-                  <Route index element={<ProductForm />} />
-                </Route>
-                <Route path="/cart" element={<PrivateRoute />}>
-                  <Route index element={<Cart />} />
-                </Route>
-                <Route path="/inventory" element={<PrivateRoute />}>
-                  <Route index element={<User />} />
-                </Route>
-                <Route path="*" element={<NotFound />} />
-              </Routes>
+                  <Route path="/payment" element={<PrivateRoute />}>
+                    <Route index element={<Result />} />
+                  </Route>
+                  <Route path="/admin" element={<PrivateAdminRoute />}>
+                    <Route index element={<Dashboard />} />
+                  </Route>
+                  <Route path="/userSetting" element={<PrivateRoute />}>
+                    <Route index element={<ManageUser />} />
+                  </Route>
+                  <Route path="/AddProd" element={<PrivateRoute />}>
+                    <Route index element={<ProductForm />} />
+                  </Route>
+                  <Route path="/EditProd/:id" element={<PrivateRoute />}>
+                    <Route index element={<ProductForm />} />
+                  </Route>
+                  <Route path="/cart" element={<PrivateRoute />}>
+                    <Route index element={<Cart />} />
+                  </Route>
+                  <Route path="/inventory" element={<PrivateRoute />}>
+                    <Route index element={<User />} />
+                  </Route>
+                  <Route path="*" element={<NotFound />} />
+                </Routes>
+              }
               <Footer />
             </BrowserRouter>
           </PointContext.Provider>

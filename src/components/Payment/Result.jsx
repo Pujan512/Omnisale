@@ -108,7 +108,7 @@ const Result = () => {
         return (
             <section className="main">
                 <h1 className="text-3xl my-10">Points were purchased successfully.</h1>
-                <a onClick={()=>{navigate('/'); window.location.reload()}} className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md">Go to Homepage</a>
+                <a onClick={()=>{navigate('/');}} className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md">Go to Homepage</a>
             </section>
         )
     }
@@ -116,7 +116,7 @@ const Result = () => {
     return (
         <section className="main">
             <h1 className="text-3xl my-10">Payment Successful! Your order is being verified for delivery...</h1>
-            <a onClick={()=>{navigate('/'); window.location.reload()}} className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md">Go to Homepage</a>
+            <a onClick={()=>{navigate('/'); }} className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md">Go to Homepage</a>
         </section>
     )
 }

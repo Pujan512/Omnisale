@@ -1,10 +1,12 @@
 import { useContext, useMemo, useState, useEffect } from "react";
 import { ProductContext, CategoryContext, PointContext } from "../../Context/OmniContext";
 import { useNavigate, useParams } from "react-router";
+import Loading from "../Loading";
 
 const ProductForm = () => {
     const { products, setProducts } = useContext(ProductContext);
     const { point, setPoint } = useContext(PointContext);
+    const [loading, setLoading] = useState(false);
     const { categories } = useContext(CategoryContext);
     const [error, setError] = useState('');
     const userId = sessionStorage.getItem("user");
@@ -37,7 +39,7 @@ const ProductForm = () => {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if (point < 20) {
             setError('point');
@@ -63,38 +65,44 @@ const ProductForm = () => {
             ? `${import.meta.env.VITE_API_URL_PRODUCT}${id}`
             : import.meta.env.VITE_API_URL_PRODUCT;
 
-        fetch(url, {
-            method: id ? "PUT" : "POST",
-            body: newProduct,
-            headers: {
-                'Authorization': `Bearer ${document.cookie.split('=')[1]}`
-            }
-        }).then(response => response.json())
-            .then(data => {
-                if (id) {
-                    const updatedProducts = products.map(p =>
-                        p.id === id ? { ...newProduct, id } : p
-                    );
-                    setProducts(updatedProducts);
-                    navigate('/');
-                } else {
-                    setProducts([...products, data]);
-                    fetch(import.meta.env.VITE_API_URL_POINT + userId, {
-                        method: "PUT",
-                        headers: {
-                            "Content-Type": "application/json",
-                            "Authorization": `Bearer ${document.cookie.split('=')[1]}`
-                        },
-                        body: JSON.stringify(point - 15)
-                    }).then(res => res.json())
-                        .then(pts => {
-                            setPoint(pts.value)
-                            navigate('/');
-                        }).catch(err => console.log(err))
+        setLoading(true);
+
+        try {
+            const response = await fetch(url, {
+                method: id ? "PUT" : "POST",
+                body: newProduct,
+                headers: {
+                    'Authorization': `Bearer ${document.cookie.split('=')[1]}`
                 }
-            }).catch(err => {
-                console.log(err);
-            });
+            })
+
+            const data = await response.json();
+            if (id) {
+                const updatedProducts = products.map(p =>
+                    p.id === id ? { ...newProduct, id } : p
+                );
+                setProducts(updatedProducts);
+                navigate('/');
+            } else {
+                setProducts([...products, data]);
+                const res = await fetch(import.meta.env.VITE_API_URL_POINT + userId, {
+                    method: "PUT",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${document.cookie.split('=')[1]}`
+                    },
+                    body: JSON.stringify(point - 15)
+                })
+
+                const pts = await res.json();
+                setPoint(pts.value)
+                navigate('/');
+            }
+        } catch (error) {
+            console.log(error);
+        } finally {
+            setLoading(false);
+        }
     };
 
 
@@ -158,7 +166,12 @@ const ProductForm = () => {
                     <textarea required className="border-1 p-2 w-full" rows={10}
                         name="description" id="description" onChange={handleChange} value={formData.description}></textarea>
                 </div>
-                <input type="submit" value={id ? "Update" : "Add(-20pts)"} className="cursor-pointer rounded-md border-1 hover:text-white text-red-500 py-2 px-4 hover:bg-red-500" />
+                {
+                    loading ? <div className="flex justify-center"><Loading /></div> :
+                        <button className="cursor-pointer rounded-md border-1 hover:text-white text-red-500 py-2 px-4 hover:bg-red-500">
+                            {id ? "Update" : "Add(-20pts)"}
+                        </button>
+                }
             </form>
             {error == "point" && <span className="text-red-600">You don't have enough points.</span>}
         </section>

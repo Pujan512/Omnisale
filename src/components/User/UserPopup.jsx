@@ -61,7 +61,7 @@ const UserPopup = ({isVisible, onClose}) => {
                     </Link>
                 </div>
                 <a className="border-b-1 p-2 cursor-pointer" onClick={() => { onClose(); navigate('/inventory') }}>Inventory</a>
-                <a className="pt-2 px-2 cursor-pointer" onClick={() => { onClose(); logout(); navigate('/'); window.location.reload() }}>Logout</a>
+                <a className="pt-2 px-2 cursor-pointer" onClick={() => { onClose(); logout(); navigate('/'); }}>Logout</a>
             </nav>
         </section>
     )

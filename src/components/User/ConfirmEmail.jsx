@@ -34,7 +34,6 @@ export default function ConfirmEmail() {
                         sessionStorage.setItem("email", user.email)
                         document.cookie = `token=${user.token}`
                         navigate('/');
-                        window.location.reload();
                     }).catch(err => console.log(err))
             })
             .catch(err => console.log(err))
