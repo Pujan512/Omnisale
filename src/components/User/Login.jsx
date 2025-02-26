@@ -22,6 +22,7 @@ const Login = () => {
             setLoading(true);
             await auth("login", formData);
             navigate('/');
+            window.location.reload();
         } catch (error) {
             setError(error.message);
         } finally {

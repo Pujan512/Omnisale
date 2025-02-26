@@ -2,6 +2,7 @@ import { useContext, useMemo, useState, useEffect } from "react";
 import { ProductContext, CategoryContext, PointContext } from "../../Context/OmniContext";
 import { useNavigate, useParams } from "react-router";
 import Loading from "../Loading";
+import imageCompression from "browser-image-compression";
 
 const ProductForm = () => {
     const { products, setProducts } = useContext(ProductContext);
@@ -32,10 +33,40 @@ const ProductForm = () => {
         }));
     };
 
-    const handleFileChange = (e) => {
+    const compressImage = async (file) => {
+            const options = {
+                maxSizeMB: 0.1, 
+                maxWidthOrHeight: 1024,
+                useWebWorker: true, 
+            };
+        
+            try {
+                const compressedFile = await imageCompression(file, options);
+                return compressedFile;
+            } catch (error) {
+                console.error('Error compressing image:', error);
+                return file;
+            }
+    }
+
+    const handleFileChange = async (e) => {
+        const files = Array.from(e.target.files);
+
+        const compressedImages = await Promise.all(files.map(async (file) => {
+            const compressedFile = await compressImage(file);
+            return new File([compressedFile], file.name, {
+                type: compressedFile.type,
+                lastModified: file.lastModified
+            });
+        }));
+
+        const dataTransfer = new DataTransfer();
+        compressedImages.forEach(file => dataTransfer.items.add(file));
+        const fileList = dataTransfer.files;
+
         setFormData(prevData => ({
             ...prevData,
-            ImageFiles: e.target.files
+            ImageFiles: fileList
         }));
     };
 
