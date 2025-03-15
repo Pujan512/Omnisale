@@ -18,7 +18,7 @@ const Cart = () => {
     },[cart])
 
     return (
-        <section className="main flex flex-col justify-between h-[85vh]">
+        <section className="main flex flex-col justify-between flex-1">
             <article>
             <h1 className="text-2xl font-semibold my-5">Cart</h1>
                 <table className="min-w-full min-h-50 divide-y divide-gray-700 table-auto">
