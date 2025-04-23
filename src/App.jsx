@@ -1,31 +1,33 @@
-import Homepage from "./components/Homepage"
-import Navbar from "./components/Navbar"
+import { useState, useMemo, useEffect, lazy } from "react"
 import { BrowserRouter, Routes, Route } from 'react-router'
-import ProductDesc from "./components/products/ProductDesc"
-import ProductForm from "./components/products/ProductForm"
-import { useState, useMemo, useEffect } from "react"
 import { ProductContext, CategoryContext, CartContext, PointContext } from "./Context/OmniContext"
-import Cart from "./components/Cart/Cart"
-import SignUp from "./components/User/SignUp"
-import Login from "./components/User/Login"
-import LoginAdmin from "./components/Admin/LoginAdmin"
-import User from "./components/User/User"
-import Result from "./components/Payment/Result"
-import PrivateRoute from "./components/PrivateRoute"
-import SearchResults from "./components/products/SearchResults"
-import ManageUser from "./components/User/ManageUser"
-import BuyPoints from "./components/Payment/BuyPoints"
-import ConfirmEmail from "./components/User/ConfirmEmail"
-import ResetPassword from "./components/User/ResetPassword"
-import ForgotPassword from "./components/User/ForgotPassword"
+
+import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
-import About from "./components/Static/About"
-import Privacy from "./components/Static/Privacy"
-import Terms from "./components/Static/Terms"
-import NotFound from "./components/NotFound"
-import Dashboard from "./components/Admin/Dashboard"
-import PrivateAdminRoute from "./components/Admin/PrivateAdminRoute"
 import Loading from "./components/Loading"
+
+const Homepage = lazy(() => import("./components/Homepage"));
+const ProductDesc = lazy(() => import("./components/products/ProductDesc"));
+const ProductForm = lazy(() => import("./components/products/ProductForm"));
+const Cart = lazy(() => import("./components/Cart/Cart"));
+const SignUp = lazy(() => import("./components/User/SignUp"));
+const Login = lazy(() => import("./components/User/Login"));
+const LoginAdmin = lazy(() => import("./components/Admin/LoginAdmin"));
+const User = lazy(() => import("./components/User/User"));
+const Result = lazy(() => import("./components/Payment/Result"));
+const PrivateRoute = lazy(() => import("./components/PrivateRoute"));
+const SearchResults = lazy(() => import("./components/products/SearchResults"));
+const ManageUser = lazy(() => import("./components/User/ManageUser"));
+const BuyPoints = lazy(() => import("./components/Payment/BuyPoints"));
+const ConfirmEmail = lazy(() => import("./components/User/ConfirmEmail"));
+const ResetPassword = lazy(() => import("./components/User/ResetPassword"));
+const ForgotPassword = lazy(() => import("./components/User/ForgotPassword"));
+const About = lazy(() => import("./components/Static/About"));
+const Privacy = lazy(() => import("./components/Static/Privacy"));
+const Terms = lazy(() => import("./components/Static/Terms"));
+const NotFound = lazy(() => import("./components/NotFound"));
+const Dashboard = lazy(() => import("./components/Admin/Dashboard"));
+const PrivateAdminRoute = lazy(() => import("./components/Admin/PrivateAdminRoute"));
 
 function App() {
   const [cart, setCart] = useState([]);
