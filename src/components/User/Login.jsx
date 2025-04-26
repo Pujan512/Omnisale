@@ -50,7 +50,7 @@ const Login = () => {
                         />
                     </div>
                 ))}
-                <Link className="cursor-pointer text-xs text-blue-400 text-right" to="/forgotPassword">Forgot Password?</Link>
+                <Link className="cursor-pointer text-xs text-blue-400 self-end" to="/forgotPassword">Forgot Password?</Link>
                 {error && <p className="text-red-500">{error}</p>}
                 <input type="submit" value="Login" className="border-1 rounded-sm cursor-pointer p-2 text-red-500 hover:text-white hover:bg-red-500" />
             </form>
