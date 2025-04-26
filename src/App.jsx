@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, lazy } from "react"
 import { BrowserRouter, Routes, Route } from 'react-router'
-import { ProductContext, CategoryContext, CartContext, PointContext } from "./Context/OmniContext"
+import { ProductContext, CategoryContext, CartContext, PointContext, UserContext } from "./Context/OmniContext"
 
 import Navbar from "./components/Navbar"
 import Footer from "./components/Footer"
@@ -30,6 +30,7 @@ const Dashboard = lazy(() => import("./components/Admin/Dashboard"));
 const PrivateAdminRoute = lazy(() => import("./components/Admin/PrivateAdminRoute"));
 
 function App() {
+  const [user, setUser] = useState(sessionStorage.getItem("user") || null);
   const [cart, setCart] = useState([]);
   const [point, setPoint] = useState(null);
   const [products, setProducts] = useState([]);
@@ -77,73 +78,77 @@ function App() {
   }
 
   useEffect(() => {
-      (async function(){  
-        await fetchProducts();
-        await fetchCategories();
-        setLoading(false);
-      })()
-    if (document.cookie) {
-      fetchCart(sessionStorage.getItem("user"));
-      fetchPoint(sessionStorage.getItem("user"));
+    (async function () {
+      await fetchProducts();
+      await fetchCategories();
+      setLoading(false);
+    })()
+    if (user && document.cookie) {
+      fetchCart(user);
+      fetchPoint(user);
     }
-    if (!document.cookie)
-      sessionStorage.clear()
-  }, [])
+    if (!user) {
+      document.cookie = "token=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      setUser(null);
+    }
+  }, [user])
 
   return (
-    <CategoryContext.Provider value={{ categories, setCategories }}>
-      <ProductContext.Provider value={productContextValue}>
-        <CartContext.Provider value={{ cart, setCart }}>
-          <PointContext.Provider value={{ point, setPoint }}>
-            <BrowserRouter>
-              <Navbar />
-              {loading ? <div className="main flex flex-1 items-center justify-center"><Loading /></div> :
-                <Routes>
-                  <Route path="/" element={<Homepage />} />
-                  <Route path="/BuyPoints" element={<BuyPoints />} />
-                  <Route path="/search" element={<SearchResults />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/adminLogin" element={<LoginAdmin />} />
-                  <Route path="/signup" element={<SignUp />} />
-                  <Route path="/confirmEmail" element={<ConfirmEmail />} />
-                  <Route path="/forgotPassword" element={<ForgotPassword />} />
-                  <Route path="/resetPassword" element={<ResetPassword />} />
-                  <Route path="/product/:id" element={<ProductDesc />} />
-                  <Route path="/category/:id" element={<Homepage />} />
-                  <Route path="/privacy" element={<Privacy />} />
-                  <Route path="/terms" element={<Terms />} />
-                  <Route path="/about" element={<About />} />
+    <UserContext.Provider value={{ user, setUser }}>
+      <CategoryContext.Provider value={{ categories, setCategories }}>
+        <ProductContext.Provider value={productContextValue}>
+          <CartContext.Provider value={{ cart, setCart }}>
+            <PointContext.Provider value={{ point, setPoint }}>
+              <BrowserRouter>
+                <Navbar />
+                {loading ? <div className="main flex flex-1 items-center justify-center"><Loading /></div> :
+                  <Routes>
+                    <Route path="/" element={<Homepage />} />
+                    <Route path="/BuyPoints" element={<BuyPoints />} />
+                    <Route path="/search" element={<SearchResults />} />
+                    <Route path="/login" element={<Login />} />
+                    <Route path="/adminLogin" element={<LoginAdmin />} />
+                    <Route path="/signup" element={<SignUp />} />
+                    <Route path="/confirmEmail" element={<ConfirmEmail />} />
+                    <Route path="/forgotPassword" element={<ForgotPassword />} />
+                    <Route path="/resetPassword" element={<ResetPassword />} />
+                    <Route path="/product/:id" element={<ProductDesc />} />
+                    <Route path="/category/:id" element={<Homepage />} />
+                    <Route path="/privacy" element={<Privacy />} />
+                    <Route path="/terms" element={<Terms />} />
+                    <Route path="/about" element={<About />} />
 
-                  <Route path="/payment" element={<PrivateRoute />}>
-                    <Route index element={<Result />} />
-                  </Route>
-                  <Route path="/admin" element={<PrivateAdminRoute />}>
-                    <Route index element={<Dashboard />} />
-                  </Route>
-                  <Route path="/userSetting" element={<PrivateRoute />}>
-                    <Route index element={<ManageUser />} />
-                  </Route>
-                  <Route path="/AddProd" element={<PrivateRoute />}>
-                    <Route index element={<ProductForm />} />
-                  </Route>
-                  <Route path="/EditProd/:id" element={<PrivateRoute />}>
-                    <Route index element={<ProductForm />} />
-                  </Route>
-                  <Route path="/cart" element={<PrivateRoute />}>
-                    <Route index element={<Cart />} />
-                  </Route>
-                  <Route path="/inventory" element={<PrivateRoute />}>
-                    <Route index element={<User />} />
-                  </Route>
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              }
-              <Footer />
-            </BrowserRouter>
-          </PointContext.Provider>
-        </CartContext.Provider>
-      </ProductContext.Provider>
-    </CategoryContext.Provider>
+                    <Route path="/payment" element={<PrivateRoute />}>
+                      <Route index element={<Result />} />
+                    </Route>
+                    <Route path="/admin" element={<PrivateAdminRoute />}>
+                      <Route index element={<Dashboard />} />
+                    </Route>
+                    <Route path="/userSetting" element={<PrivateRoute />}>
+                      <Route index element={<ManageUser />} />
+                    </Route>
+                    <Route path="/AddProd" element={<PrivateRoute />}>
+                      <Route index element={<ProductForm />} />
+                    </Route>
+                    <Route path="/EditProd/:id" element={<PrivateRoute />}>
+                      <Route index element={<ProductForm />} />
+                    </Route>
+                    <Route path="/cart" element={<PrivateRoute />}>
+                      <Route index element={<Cart />} />
+                    </Route>
+                    <Route path="/inventory" element={<PrivateRoute />}>
+                      <Route index element={<User />} />
+                    </Route>
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
+                }
+                <Footer />
+              </BrowserRouter>
+            </PointContext.Provider>
+          </CartContext.Provider>
+        </ProductContext.Provider>
+      </CategoryContext.Provider>
+    </UserContext.Provider>
   )
 }
 

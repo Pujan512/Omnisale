@@ -1,8 +1,9 @@
-import { useRef, useState } from "react";
+import { useRef, useState, useContext } from "react";
 import { getCurrentUser } from "../authService";
 import { Link, useNavigate, useSearchParams } from "react-router";
 import UserPopup from "./User/UserPopup";
 import { useEffect } from "react";
+import { UserContext } from "../Context/OmniContext";
 import { logout } from "../authService";
 
 const Navbar = () => {
@@ -13,13 +14,14 @@ const Navbar = () => {
     const [ham, setHam] = useState('|||');
     const [searchParams, setSearchParams] = useSearchParams();
     const [text, setText] = useState('');
+    const {user, setUser} = useContext(UserContext);
     useEffect(() => {
         if (sessionStorage.getItem("adminRole")) {
             const bytes = atob(sessionStorage.getItem("adminRole"));
             const decoded = new TextDecoder('utf-8').decode(new Uint8Array([...bytes].map(char => char.charCodeAt(0))));
             setText(decoded);
         }
-    }, [text])
+    }, [user, text])
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -83,7 +85,7 @@ const Navbar = () => {
                 <div className="flex gap-2">
                     {text == "PujanNirjala" ? <>
                         <Link className="pt-2 px-2 cursor-pointer" to={"/admin"}>Admin</Link>
-                        <a className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md" onClick={() => { logout(); navigate('/'); }}>Logout</a>
+                        <a className="cursor-pointer bg-zinc-700 hover:bg-zinc-600 text-white px-4 py-2 rounded-md" onClick={() => { logout(); setUser(null); navigate('/'); window.location.reload()}}>Logout</a>
                     </> : <>
                         <button className="text-red-400 border-1 font-semibold text-base lg:text-xl rounded-md flex gap-2 pr-4 items-center hover:bg-red-500 hover:text-white cursor-pointer" onClick={() => navigate('/AddProd')}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="currentColor" className="bi bi-plus inline " viewBox="0 0 16 16">

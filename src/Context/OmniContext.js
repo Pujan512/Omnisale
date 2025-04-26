@@ -7,3 +7,5 @@ export const CategoryContext = createContext(null);
 export const CartContext = createContext(null);
 
 export const PointContext = createContext(null);
+
+export const UserContext = createContext(null);

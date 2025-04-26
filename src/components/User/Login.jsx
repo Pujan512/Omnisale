@@ -1,12 +1,14 @@
-import { useState, useRef } from "react";
-import { Link, Links, useNavigate } from "react-router";
+import { useState, useRef, useContext } from "react";
+import { Link, useNavigate } from "react-router";
 import { auth } from "../../authService";
 import Loading from "../Loading";
+import { UserContext } from "../../Context/OmniContext";
 
 const Login = () => {
     const inputRefs = useRef([]);
     const [error, setError] = useState('');
     const [loading, setLoading] = useState(false);
+    const {setUser} = useContext(UserContext);
     const navigate = useNavigate();
 
     const formFields = ['email', 'password']
@@ -22,7 +24,7 @@ const Login = () => {
             setLoading(true);
             await auth("login", formData);
             navigate('/');
-            window.location.reload();
+            setUser(sessionStorage.getItem("user"));
         } catch (error) {
             setError(error.message);
         } finally {
